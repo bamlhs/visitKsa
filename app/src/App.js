@@ -10,11 +10,12 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import DashBoardScreen from './screens/DashBoardScreen';
+import PlacesScreen from './screens/PlacesScreen';
 
 export default class App extends Component {
   render() {
     return (
-      <DashBoardScreen />
+      <PlacesScreen />
     );
   }
 }
