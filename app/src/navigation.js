@@ -9,7 +9,7 @@ const HomeStack = createStackNavigator({
     places: PlacesScreen,
     add: AddPlaceScreen
 }, {
-    initialRouteName: 'add'
+    initialRouteName: 'dash'
 });
 
 
