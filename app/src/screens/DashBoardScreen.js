@@ -23,7 +23,8 @@ export default class DashBoardScreen extends Component {
                     
                     </View>
                     <View style={styles.mainButtonsView}>
-                        <CustomizedButton title="Show Places"  onPress={()=>(console.log("Show Places")
+                        <CustomizedButton title="Show Places"
+                          onPress={()=>(this.props.navigation.navigate('places')
                         )}/>
                         <CustomizedButton title="Add Place" onPress={()=>(console.log("Add Place")
                         )}/>

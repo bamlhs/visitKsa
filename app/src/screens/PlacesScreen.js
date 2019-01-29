@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 import { Button, Avatar, ListItem } from 'react-native-elements';
-
+import CustomizedListItem from '../components/CustomizedListItem';
 
 class PlacesScreen extends Component {
   constructor(props) {
@@ -24,15 +24,12 @@ class PlacesScreen extends Component {
   }
   //({item}) => <Text>{item.name}</Text>
   renderItem = ({item}) => (
-    <ListItem 
-    onPress={() => (console.log(item)
-    )}
-    title={item.name} subtitle={item.category} 
-    leftAvatar={{ rounded: true, source: { uri: item.thumb } }} 
+      <CustomizedListItem 
+      showImage
+      item={item}
     />
   );
   render() {
-      console.log(this.state.data);
     if (this.state.data.length == 0 ) {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
@@ -41,7 +38,7 @@ class PlacesScreen extends Component {
         );
     }
     return (
-      <View>
+      <View style={{backgroundColor: "#eeeeee", flex: 1,}}>
 <FlatList
 keyExtractor={(item) => (item._id)}
   data={this.state.data}

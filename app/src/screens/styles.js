@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     mainPageView: {
-        flex: 8,
+        flex: 2,
     },
     mainButtonsView: {
         flex: 1,

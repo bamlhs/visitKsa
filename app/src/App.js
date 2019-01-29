@@ -9,13 +9,11 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import DashBoardScreen from './screens/DashBoardScreen';
-import PlacesScreen from './screens/PlacesScreen';
-
+import HomeStack from './navigation';
 export default class App extends Component {
   render() {
     return (
-      <PlacesScreen />
+      <HomeStack />
     );
   }
 }
