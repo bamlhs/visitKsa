@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import CustomizedButton from '../components/CustomizedButton';
-import { Input, CheckBox } from 'react-native-elements';
+import { Input, CheckBox, Icon } from 'react-native-elements';
+import {BASE_URL} from '../config';
 import qs from 'qs';
 import axios from 'axios';
 class AddPlaceScreen extends Component {
@@ -11,6 +12,7 @@ class AddPlaceScreen extends Component {
         name: '',
         checked: false,
         added: false,
+        disabled: true,
     };
     this.onSavePress = this.onSavePress.bind(this);
   }
@@ -18,16 +20,15 @@ class AddPlaceScreen extends Component {
     const { name } = this.state;
     const data =    {
         "thumb": "https://lorempixel.com/400/400/city/",
-        "name": "National Museum of Saudi Arabia",
+        name,
         "stars": 4,
         "category": "Historical Interest"
     };
 
         
-    const url = 'https://rnc.herokuapp.com/api/places';
-    console.log(JSON.stringify(data));
-    
-    axios.post(url, JSON.stringify(data)
+    const url = `${BASE_URL}/api/places`;    
+    axios.post(url, data
+      
       )
     .then((resp) => (this.setState({added : true})))
     .catch((error) => {
@@ -40,15 +41,14 @@ class AddPlaceScreen extends Component {
   render() {
       console.log(this.state.title);
     if (this.state.added) {
-        return (
-            <Text>Your place has been added.</Text>
-        );
+      this.props.navigation.navigate("places");
+       
     }
 
     return (
       <View>
         <Input placeholder="name" 
-        onChangeText={(name) => (this.setState({name}))}
+        onChangeText={(name) => (this.setState({name, disabled: false}))}
         />
 
 <CheckBox
@@ -67,7 +67,7 @@ class AddPlaceScreen extends Component {
   uncheckedIcon='circle-o'
   checked={this.state.checked}
 />
-        <CustomizedButton title="Save New" onPress={this.onSavePress
+        <CustomizedButton disabled={this.state.disabled} title="Save New" onPress={this.onSavePress
         } />
 
       </View>

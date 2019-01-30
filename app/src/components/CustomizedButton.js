@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
 
 });
 const CustomizedButton = ({
-    title, onPress
+    title, onPress, disabled
 }) => (
 <Button 
+    disabled={disabled}
     style={styles.style}
     buttonStyle={styles.buttonStyle}
     containerStyle={styles.containerStyle}

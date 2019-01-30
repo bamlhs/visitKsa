@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator} from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Alert} from 'react-native';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import { Button, Avatar, ListItem } from 'react-native-elements';
 import CustomizedListItem from '../components/CustomizedListItem';
+import { getPlaces } from '../redux/actions/placesActions';
 
 class PlacesScreen extends Component {
   constructor(props) {
@@ -12,15 +14,10 @@ class PlacesScreen extends Component {
         loading: false,
     };
     this.renderItem = this.renderItem.bind(this);
+    this.changeRedux = this.changeRedux.bind(this);
   }
   componentDidMount() {
-
-    const url = 'https://rnc.herokuapp.com/api/places';
-    axios.get(url)
-    .then((resp) => (this.setState({data: resp.data})
-    ))
-    .catch((err) => (console.log(err)
-    ))
+   this.props.getPlaces();
   }
   //({item}) => <Text>{item.name}</Text>
   renderItem = ({item}) => (
@@ -29,8 +26,21 @@ class PlacesScreen extends Component {
       item={item}
     />
   );
+  componentDidUpdate() {
+    if (this.props.places.error) {
+      Alert.alert("ERROR", "Server not responding");
+      
+    }
+  }
+  changeRedux = () => {
+    console.log("changeRedux");
+   
+    
+  }
   render() {
-    if (this.state.data.length == 0 ) {
+    console.log(this.props);
+    
+    if (this.props.places.loading) {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
                 <ActivityIndicator size={1} color={'red'} />
@@ -41,12 +51,18 @@ class PlacesScreen extends Component {
       <View style={{backgroundColor: "#eeeeee", flex: 1,}}>
 <FlatList
 keyExtractor={(item) => (item._id)}
-  data={this.state.data}
+  data={this.props.places.data}
   renderItem={this.renderItem}
 />
+<Button onPress={this.changeRedux} title="Change Me" />
       </View>
     );
   }
 }
 
-export default PlacesScreen;
+const mapStateToProps = (state) => ({
+  places: state.places,
+});
+
+
+export default connect(mapStateToProps, {getPlaces})(PlacesScreen);
