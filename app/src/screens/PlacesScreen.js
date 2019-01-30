@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator, Alert} from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, Alert, I18nManager} from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Button, Avatar, ListItem } from 'react-native-elements';
 import CustomizedListItem from '../components/CustomizedListItem';
-import { getPlaces } from '../redux/actions/placesActions';
+import { getPlaces, selectItem} from '../redux/actions/placesActions';
 
 class PlacesScreen extends Component {
+  static navigationOptions = {
+    title: "Places",
+
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +19,17 @@ class PlacesScreen extends Component {
     };
     this.renderItem = this.renderItem.bind(this);
     this.changeRedux = this.changeRedux.bind(this);
+    this.selectItem = this.selectItem.bind(this);
+  }
+
+  selectItem = (item) => {
+    console.log("selectItem");
+    console.log(item);
+    
+
+    this.props.selectItem(item);
+    this.props.navigation.navigate('place');
+    
   }
   componentDidMount() {
    this.props.getPlaces();
@@ -22,6 +37,7 @@ class PlacesScreen extends Component {
   //({item}) => <Text>{item.name}</Text>
   renderItem = ({item}) => (
       <CustomizedListItem 
+      onPress={this.selectItem.bind(this, item)}
       showImage
       item={item}
     />
@@ -38,7 +54,7 @@ class PlacesScreen extends Component {
     
   }
   render() {
-    console.log(this.props);
+    console.log(I18nManager.isRTL);
     
     if (this.props.places.loading) {
         return (
@@ -65,4 +81,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, {getPlaces})(PlacesScreen);
+export default connect(mapStateToProps, {getPlaces, selectItem})(PlacesScreen);

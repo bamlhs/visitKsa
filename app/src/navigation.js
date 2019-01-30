@@ -2,14 +2,21 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 import DashBoardScreen from './screens/DashBoardScreen';
 import PlacesScreen from './screens/PlacesScreen';
 import AddPlaceScreen from './screens/AddPlaceScreen';
+import PlaceScreen from './screens/PlaceScreen';
 
 
 const HomeStack = createStackNavigator({
     dash: DashBoardScreen,
     places: PlacesScreen,
-    add: AddPlaceScreen
+    add: AddPlaceScreen,
+    place: PlaceScreen
 }, {
-    initialRouteName: 'add'
+    initialRouteName: 'places',
+    defaultNavigationOptions: {
+       
+        headerStyle: {
+        }
+    }
 });
 
 

@@ -2,6 +2,7 @@ const initialState = {
     data: [],
     loading: false,
     error: false,
+    selectedItem: [],
 }
 
 export default (state = initialState, action) => {
@@ -12,6 +13,8 @@ export default (state = initialState, action) => {
     return { ...state, loading: false, data: action.payload };
     case 'GET_PLACES_FAILED':
     return { ...state, loading: false, error: true };
+    case 'SELECT_ITEM':
+    return { ...state, selectedItem: action.payload };
 
   default:
     return state

@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-nativ
 import styles from './styles';
 import CustomizedButton from '../components/CustomizedButton';
 export default class DashBoardScreen extends Component {
+    static navigationOptions = {
+        header: null,
+      };
     constructor(props) {
         super(props);
         this.state = {
