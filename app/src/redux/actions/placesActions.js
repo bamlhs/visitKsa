@@ -6,7 +6,7 @@ export const getPlaces = () => {
         dispatch({type: 'GET_PLACES_PREPARE'})
 
 
-        const url = 'https://rnc.herokuapp.comc/api/places';
+        const url = 'https://rnc.herokuapp.com/api/places';
         axios.get(url)
         .then((resp) => {
             dispatch({type: 'GET_PLACES_SUCCCESS', payload: resp.data}) 
