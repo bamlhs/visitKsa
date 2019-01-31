@@ -11,7 +11,7 @@ const HomeStack = createStackNavigator({
     add: AddPlaceScreen,
     place: PlaceScreen
 }, {
-    initialRouteName: 'places',
+    initialRouteName: 'dash',
     defaultNavigationOptions: {
        
         headerStyle: {

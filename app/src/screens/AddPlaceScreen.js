@@ -22,12 +22,12 @@ class AddPlaceScreen extends Component {
     this.onSelectImage = this.onSelectImage.bind(this);
   }
   onSavePress = () => {
-    const { name } = this.state;
+    const { name, image } = this.state;
     const data = {
       "thumb": "https://lorempixel.com/400/400/city/",
       name,
       "stars": 4,
-      "category": "Historical Interest"
+      "category": "Historical Interest",
     };
 
 
@@ -63,7 +63,7 @@ class AddPlaceScreen extends Component {
         console.log('User tapped custom button: ', response.customButton);
       } else {
 
-        const source = { uri: response.uri };
+        const source = { uri: response.data };
 
         // You can also display the image using data:
         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
@@ -106,7 +106,7 @@ class AddPlaceScreen extends Component {
         <Button
           raised
           icon={{ name: 'camera' }}
-          title='BUTTON WITH ICON'
+          
           onPress={this.onSelectImage}
         />
         <Avatar source={this.state.image} size={"xlarge"} />

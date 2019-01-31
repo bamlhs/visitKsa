@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
+import { Text, View, Dimensions, TouchableOpacity, ActivityIndicator} from 'react-native';
 import StarRating from 'react-native-star-rating';
+import { Image } from 'react-native-elements';
 
 const CustomizedListItem = (
     
@@ -15,7 +16,10 @@ const CustomizedListItem = (
                 {showImage && 
                  <Image source={{uri: item.thumb}}
                     style={{width, height: height/2}}
-                    resizeMode={'cover'} />
+                    resizeMode={'cover'} 
+                    PlaceholderContent={<ActivityIndicator color={"#fff"}/>}
+
+                    />
                 }
                  </View>
             <View style={{
